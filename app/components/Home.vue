@@ -1,41 +1,56 @@
 <template>
-    <Page>
-        <ActionBar>
-            <Label text="Home"/>
-        </ActionBar>
-
-        <GridLayout>
-            <Label class="info">
-                <FormattedString>
-                    <Span class="fas" text.decode="&#xf135; "/>
-                    <Span :text="message"/>
-                </FormattedString>
-            </Label>
-        </GridLayout>
+    <Page @loaded="loadTasks">
+        <ActionBar title="tasks2" />
+        <ListView heigth="100%" v-for="item in tasks">
+            <v-template>
+                <GridLayout
+                    height="280"
+                    borderRadius="10"
+                    class="bg-secondary"
+                    rows="*, auto, auto"
+                    columns="*"
+                    margin="5 10"
+                    padding="0"
+                >
+                    <Label 
+                        row="0"
+                        margin="5 5 5 5"
+                        fontWeight="700"
+                        class="text-primary"
+                        fontSize="18"
+                        :text="item.name"
+                    />
+                    <Label 
+                        row="1"
+                        margin="5 5 5 5"
+                        fontWeight="700"
+                        class="text-secondary"
+                        fontSize="12"
+                        :text="item.duration"
+                    />
+                </GridLayout>
+            </v-template>
+        </ListView>
     </Page>
 </template>
 
 <script>
+import { getTasks } from '../services/Task';
   export default {
-    computed: {
-      message() {
-        return "Blank {N}-Vue app";
-      }
+    data() {
+        return {
+            tasks: []
+        };
+    },
+    methods: {
+        loadTasks() {
+            getTasks().then(results => {
+                this.tasks = results;
+            })
+        }
     }
-  };
+};
 </script>
 
 <style scoped lang="scss">
-    @import '@nativescript/theme/scss/variables/blue';
-
-    // Custom styles
-    .fas {
-        @include colorize($color: accent);
-    }
-
-    .info {
-        font-size: 20;
-        horizontal-align: center;
-        vertical-align: center;
-    }
 </style>

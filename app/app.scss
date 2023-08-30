@@ -19,3 +19,34 @@
   font-family: 'Font Awesome 5 Free', 'fa-regular-400';
   font-weight: 400;
 }
+
+.ns-light {
+  .bg-primary {
+    background-color: #fdfdfd;
+  }
+  .bg-secondary {
+    background-color: #ffffff;
+  }
+  .text-primary {
+    color: #444;
+  }
+  .text-secondary {
+    color: #777;
+  }
+}
+
+// applied when device is in dark mode
+.ns-dark {
+  .bg-primary {
+    background-color: #212121;
+  }
+  .bg-secondary {
+    background-color: #383838;
+  }
+  .text-primary {
+    color: #eee;
+  }
+  .text-secondary {
+    color: #ccc;
+  }
+}
